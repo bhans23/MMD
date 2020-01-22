@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  over_all: 1
+  sad: 1
+  happy: 1
+  depressed: 1
+  mood_time: 2020-01-21 13:24:20
+  day: one
+
+two:
+  over_all: 1
+  sad: 1
+  happy: 1
+  depressed: 1
+  mood_time: 2020-01-21 13:24:20
+  day: two
