@@ -1,11 +1,12 @@
 
-import {useContext} from 'react';
-import {AuthContext} from '../../providers/AuthContext'
+import React from 'react';
+import Login from '../auth/Login';
 
 const Tracker = () => {
-  const auth = useContext(AuthContext)
-  console.log(auth)
-  return null
+  
+  return (
+    <Login/>
+  )
 }
  
 

@@ -1,8 +1,8 @@
 import React, { createContext, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 
 export const useAuth = () => {
-  const [user , setUser] = useState(null);
+  const [user, setUser] = useState(null);
   const [edit, setEdit] = useState(false);
 
   const handleRegister = user => {
@@ -42,12 +42,14 @@ export const useAuth = () => {
       })
       .catch(err => console.log(err));
   };
+
   return {
     actions: {
       handleLogin,
       handleLogout,
       handleRegister,
       toggleEdit,
+      authenticated: user !== null,
       updateUser
     },
     data: { user, edit }
