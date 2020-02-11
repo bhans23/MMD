@@ -8,8 +8,8 @@ const FetchUser = ({children}) => {
   
 
   useEffect(() => {
-    const {auth:{actions:{authenticated}}} = authenticated;
-    const {auth:{actions:{setUser}}} = setUser;
+    const {actions:{authenticated, setUser}} = auth;
+  
 
     if (authenticated) {
         loaded();
