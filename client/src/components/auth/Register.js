@@ -16,16 +16,14 @@ const Register = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState(null);
   const [first_name, setFirst_name] = useState(null);
   const [last_name, setLast_name] = useState(null);
+  const {actions:{handleRegister} } = auth;
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    const { handleRegister, history } = auth;
-
     if (password === passwordConfirmation)
       handleRegister(
-         email, password, passwordConfirmation, first_name, last_name,
-        history
+         {email, password, passwordConfirmation, first_name, last_name}
+        
       );
     else alert("Passwords Do Not Match!");
   };

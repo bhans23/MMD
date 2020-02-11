@@ -13,10 +13,11 @@ const Login = () => {
   const [password, setPassword] = useState(null);
 
   const auth = useContext(AuthContext);
+  const {actions:{handleLogin}} = auth;
 
   const handleSubmit = e => {
     e.preventDefault();
-    auth.handleLogin(email, password);
+    handleLogin(email, password);
   };
 
   const handleEmailChange = e => {

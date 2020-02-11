@@ -8,7 +8,9 @@ export const useAuth = () => {
   const handleRegister = user => {
     axios
       .post("/api/auth", user)
-      .then(res => setUser(res.data.data))
+      .then(res => {
+        setUser(res.data.data);
+      })
       .catch(err => console.log(err));
   };
 
