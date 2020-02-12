@@ -1,9 +1,10 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useHistory } from "react";
 import axios from "axios";
 
 export const useAuth = () => {
   const [user, setUser] = useState(null);
   const [edit, setEdit] = useState(false);
+  const history = useHistory();
 
   const handleRegister = user => {
     axios
@@ -54,7 +55,7 @@ export const useAuth = () => {
       authenticated: user !== null,
       updateUser
     },
-    data: { user, edit }
+    data: { user, edit, history }
   };
 };
 
