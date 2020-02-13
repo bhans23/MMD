@@ -6,11 +6,11 @@ import App from "./App";
 import { AuthProvider } from "./providers/AuthContext";
 
 ReactDOM.render(
-  <AuthProvider>
-    <BrowserRouter>
+  <BrowserRouter>
+    <AuthProvider>
       <App />
-    </BrowserRouter>
-  </AuthProvider>,
+    </AuthProvider>
+  </BrowserRouter>,
 
   document.getElementById("root")
 );

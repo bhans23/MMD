@@ -1,4 +1,5 @@
-import React, { createContext, useState, useHistory } from "react";
+import React, { createContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 export const useAuth = () => {
@@ -6,29 +7,32 @@ export const useAuth = () => {
   const [edit, setEdit] = useState(false);
   const history = useHistory();
 
-  const handleRegister = user => {
+  const handleRegister = (user, history) => {
     axios
       .post("/api/auth", user)
       .then(res => {
         setUser(res.data.data);
+        history.push("/");
       })
       .catch(err => console.log(err));
   };
 
-  const handleLogin = user => {
+  const handleLogin = (user, history) => {
     axios
       .post("/api/auth/sign_in", user)
       .then(res => {
         setUser(res.data.data);
+        history.push("/");
       })
       .catch(err => console.log(err));
   };
 
-  const handleLogout = () => {
+  const handleLogout = history => {
     axios
       .delete("/api/auth/sign_out")
       .then(res => {
         setUser(null);
+        history.push("/login");
       })
       .catch(err => console.log(err));
   };
