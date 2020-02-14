@@ -12,6 +12,7 @@ export const useAuth = () => {
       .post("/api/auth", user)
       .then(res => {
         setUser(res.data.data);
+        history.push("/");
       })
       .catch(err => console.log(err));
   };
@@ -21,6 +22,7 @@ export const useAuth = () => {
       .post("/api/auth/sign_in", user)
       .then(res => {
         setUser(res.data.data);
+        history.push("/");
       })
       .catch(err => console.log(err));
   };

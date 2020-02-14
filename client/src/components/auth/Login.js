@@ -7,6 +7,8 @@ import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
+import Register from "./Register";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -33,11 +35,8 @@ const Login = () => {
   };
 
   return (
-    <Container>
-      <form
-        onSubmit={handleSubmit}
-        style={{ maxWidth: 480, margin: "0 auto", textAlign: "center" }}
-      >
+    <Container style={{ maxWidth: 480, margin: "0 auto", textAlign: "center" }}>
+      <form onSubmit={handleSubmit}>
         <Typography variant="h2">Login</Typography>
         <FormGroup>
           <FormControl>
@@ -66,6 +65,10 @@ const Login = () => {
           </Button>
         </FormGroup>
       </form>
+
+      <Button variant="contained" color="primary" href= "./Register">
+        Register
+      </Button>
     </Container>
   );
 };
