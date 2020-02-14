@@ -9,15 +9,17 @@ import InputLabel from "@material-ui/core/InputLabel";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 
 const Login = () => {
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const auth = useContext(AuthContext);
-  const {actions:{handleLogin}} = auth;
+  const {
+    actions: { handleLogin }
+  } = auth;
 
   const handleSubmit = e => {
     e.preventDefault();
-    handleLogin(email, password);
+    handleLogin({ email, password });
   };
 
   const handleEmailChange = e => {
@@ -27,13 +29,16 @@ const Login = () => {
 
   const handlePasswordChange = e => {
     const { value } = e.target;
-    setPassword(value );
+    setPassword(value);
   };
 
   return (
     <Container>
-      <Typography variant="h2">Login</Typography>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        style={{ maxWidth: 480, margin: "0 auto", textAlign: "center" }}
+      >
+        <Typography variant="h2">Login</Typography>
         <FormGroup>
           <FormControl>
             <InputLabel htmlFor="emailInput">Email</InputLabel>
@@ -56,7 +61,7 @@ const Login = () => {
             />
           </FormControl>
 
-          <Button color="primary" type="submit">
+          <Button color="primary" variant="contained" type="submit">
             Submit
           </Button>
         </FormGroup>

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
@@ -7,27 +7,31 @@ export const useAuth = () => {
   const [edit, setEdit] = useState(false);
   const history = useHistory();
 
-  const handleRegister = (user, history) => {
+  useEffect(() => {
+    if (user) {
+      history.push("/");
+    }
+  }, [history, user]);
+
+  const handleRegister = user => {
     axios
       .post("/api/auth", user)
       .then(res => {
         setUser(res.data.data);
-        history.push("/");
       })
       .catch(err => console.log(err));
   };
 
-  const handleLogin = (user, history) => {
+  const handleLogin = user => {
     axios
       .post("/api/auth/sign_in", user)
       .then(res => {
         setUser(res.data.data);
-        history.push("/");
       })
       .catch(err => console.log(err));
   };
 
-  const handleLogout = history => {
+  const handleLogout = () => {
     axios
       .delete("/api/auth/sign_out")
       .then(res => {
@@ -50,16 +54,18 @@ export const useAuth = () => {
       .catch(err => console.log(err));
   };
 
+  const authenticated = user !== null;
+
   return {
     actions: {
       handleLogin,
       handleLogout,
       handleRegister,
       toggleEdit,
-      authenticated: user !== null,
       updateUser
     },
-    data: { user, edit, history }
+    authenticated,
+    data: { user, edit }
   };
 };
 

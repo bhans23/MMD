@@ -11,11 +11,11 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 
 const Register = () => {
   const auth = useContext(AuthContext);
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
-  const [passwordConfirmation, setPasswordConfirmation] = useState(null);
-  const [first_name, setFirst_name] = useState(null);
-  const [last_name, setLast_name] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [first_name, setFirst_name] = useState('');
+  const [last_name, setLast_name] = useState('');
   const {actions:{handleRegister} } = auth;
 
   const handleSubmit = e => {
@@ -23,7 +23,7 @@ const Register = () => {
     if (password === passwordConfirmation)
       handleRegister(
          {email, password, first_name, last_name}
-        
+
       );
     else alert("Passwords Do Not Match!");
   };
@@ -109,7 +109,7 @@ const Register = () => {
             <FormHelperText>Passwords must match</FormHelperText>
           </FormControl>
 
-          <Button color="primary" type="submit">
+          <Button color="primary" variant="contained" type="submit">
             Submit
           </Button>
         </FormGroup>

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import MoodForm from "../forms/MoodForm";
 import { AuthContext } from "../../providers/AuthContext";
 
+
 const Tracker = () => {
   const auth = useContext(AuthContext);
   const {
