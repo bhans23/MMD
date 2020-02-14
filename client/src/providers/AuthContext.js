@@ -1,14 +1,19 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 export const useAuth = () => {
   const [user, setUser] = useState(null);
   const [edit, setEdit] = useState(false);
+  const history = useHistory();
 
   const handleRegister = user => {
     axios
       .post("/api/auth", user)
-      .then(res => setUser(res.data.data))
+      .then(res => {
+        setUser(res.data.data);
+        history.push("/");
+      })
       .catch(err => console.log(err));
   };
 
@@ -17,6 +22,7 @@ export const useAuth = () => {
       .post("/api/auth/sign_in", user)
       .then(res => {
         setUser(res.data.data);
+        history.push("/");
       })
       .catch(err => console.log(err));
   };
@@ -26,6 +32,7 @@ export const useAuth = () => {
       .delete("/api/auth/sign_out")
       .then(res => {
         setUser(null);
+        history.push("/login");
       })
       .catch(err => console.log(err));
   };
@@ -43,15 +50,17 @@ export const useAuth = () => {
       .catch(err => console.log(err));
   };
 
+  const authenticated = user !== null;
+
   return {
     actions: {
       handleLogin,
       handleLogout,
       handleRegister,
       toggleEdit,
-      authenticated: user !== null,
       updateUser
     },
+    authenticated,
     data: { user, edit }
   };
 };

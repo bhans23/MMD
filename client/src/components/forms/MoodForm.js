@@ -1,12 +1,7 @@
-import React from 'react';
+import React from "react";
 
-const MoodForm = () => (
-  <>
-
-   
-   
-  </>
-
-)
+const MoodForm = () => {
+  return <>Hello World</>;
+};
 
 export default MoodForm;

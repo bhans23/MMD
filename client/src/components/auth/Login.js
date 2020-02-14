@@ -7,16 +7,21 @@ import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
+import Register from "./Register";
+
 
 const Login = () => {
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const auth = useContext(AuthContext);
+  const {
+    actions: { handleLogin }
+  } = auth;
 
   const handleSubmit = e => {
     e.preventDefault();
-    auth.handleLogin(email, password);
+    handleLogin({ email, password });
   };
 
   const handleEmailChange = e => {
@@ -26,13 +31,13 @@ const Login = () => {
 
   const handlePasswordChange = e => {
     const { value } = e.target;
-    setPassword(value );
+    setPassword(value);
   };
 
   return (
-    <Container>
-      <Typography variant="h2">Login</Typography>
+    <Container style={{ maxWidth: 480, margin: "0 auto", textAlign: "center" }}>
       <form onSubmit={handleSubmit}>
+        <Typography variant="h2">Login</Typography>
         <FormGroup>
           <FormControl>
             <InputLabel htmlFor="emailInput">Email</InputLabel>
@@ -55,11 +60,15 @@ const Login = () => {
             />
           </FormControl>
 
-          <Button color="primary" type="submit">
+          <Button color="primary" variant="contained" type="submit">
             Submit
           </Button>
         </FormGroup>
       </form>
+
+      <Button variant="contained" color="primary" href= "./Register">
+        Register
+      </Button>
     </Container>
   );
 };
