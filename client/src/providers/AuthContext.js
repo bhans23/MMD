@@ -7,7 +7,7 @@ export const useAuth = () => {
   const [edit, setEdit] = useState(false);
   const history = useHistory();
 
-  const handleRegister = (user, history) => {
+  const handleRegister = user => {
     axios
       .post("/api/auth", user)
       .then(res => {
@@ -17,7 +17,7 @@ export const useAuth = () => {
       .catch(err => console.log(err));
   };
 
-  const handleLogin = (user, history) => {
+  const handleLogin = user => {
     axios
       .post("/api/auth/sign_in", user)
       .then(res => {
@@ -27,7 +27,7 @@ export const useAuth = () => {
       .catch(err => console.log(err));
   };
 
-  const handleLogout = history => {
+  const handleLogout = () => {
     axios
       .delete("/api/auth/sign_out")
       .then(res => {

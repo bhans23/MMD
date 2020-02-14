@@ -17,7 +17,7 @@ const Login = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    handleLogin(email, password);
+    handleLogin({ email, password });
   };
 
   const handleEmailChange = e => {
