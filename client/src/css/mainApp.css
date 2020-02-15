@@ -1,0 +1,14 @@
+.trackerCss {
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  
+}
+
+.login-form {
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-bottom: 5px;
+    
+}
