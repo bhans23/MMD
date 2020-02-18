@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_21_202640) do
+ActiveRecord::Schema.define(version: 2020_02_18_164852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,10 @@ ActiveRecord::Schema.define(version: 2020_01_21_202640) do
     t.bigint "mood_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "yoga"
+    t.integer "yoga_time"
+    t.boolean "meditation"
+    t.integer "meditation_time"
     t.index ["mood_id"], name: "index_attributes_on_mood_id"
   end
 

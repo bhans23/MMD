@@ -7,7 +7,6 @@ import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
-import Register from "./Register";
 import Grid from '@material-ui/core/Grid';
 
 

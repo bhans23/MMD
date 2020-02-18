@@ -13,15 +13,84 @@ const MoodForm = () => {
   const [sleep, setSleep] = useState(0);
   const [med, setMed] = useState("");
   const [exercise, setExercise] = useState(null);
-  const useStylesField = makeStyles(theme => ({
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2)
+  const [exerciseTime, setExerciseTime] = useState(null);
+  const [yoga, setYoga] = useState(null);
+  const [yogaTime, setYogaTime] = useState(null);
+  const [meditation, setMeditation] = useState(null);
+  const [meditationTime, setMeditationTime] = useState(null);
+
+
+  const excercizeTimeInput = exercise => {
+    if (exercise === true) {
+      return (
+        <FormControl className={classes.formControl}>
+          <InputLabel id="exercise-time-attribute">Time Exercised</InputLabel>
+          <Select
+            labelId="exercise-time-attribute"
+            id="exercise-time-attribute"
+            value={exerciseTime}
+            onChange={handleExerciseTimeChange}
+          >
+            <MenuItem value={10}>10 min</MenuItem>
+            <MenuItem value={20}>20 min</MenuItem>
+            <MenuItem value={30}>30 min</MenuItem>
+            <MenuItem value={40}>40 min</MenuItem>
+            <MenuItem value={50}>50 min</MenuItem>
+            <MenuItem value={60}>60 min</MenuItem>
+          </Select>
+        </FormControl>
+      );
+    } else {
     }
-  }));
+  };
+
+  const yogaTimeInput = yoga => {
+    if (yoga === true) {
+      return (
+        <FormControl className={classes.formControl}>
+          <InputLabel id="yoga-time-attribute">Yoga Time</InputLabel>
+          <Select
+            labelId="yoga-time-attribute"
+            id="yoga-time-attribute"
+            value={yogaTime}
+            onChange={handleYogaTimeChange}
+          >
+            <MenuItem value={10}>10 min</MenuItem>
+            <MenuItem value={20}>20 min</MenuItem>
+            <MenuItem value={30}>30 min</MenuItem>
+            <MenuItem value={40}>40 min</MenuItem>
+            <MenuItem value={50}>50 min</MenuItem>
+            <MenuItem value={60}>60 min</MenuItem>
+          </Select>
+        </FormControl>
+      );
+    } else {
+    }
+  };
+
+  const meditationTimeInput = meditation => {
+    if (meditation === true) {
+      return (
+        <FormControl className={classes.formControl}>
+          <InputLabel id="meditation-time-attribute">Meditation Time</InputLabel>
+          <Select
+            labelId="meditation-time-attribute"
+            id="meditation-time-attribute"
+            value={meditationTime}
+            onChange={handleMeditationTimeChange}
+          >
+            <MenuItem value={10}>10 min</MenuItem>
+            <MenuItem value={20}>20 min</MenuItem>
+            <MenuItem value={30}>30 min</MenuItem>
+            <MenuItem value={40}>40 min</MenuItem>
+            <MenuItem value={50}>50 min</MenuItem>
+            <MenuItem value={60}>60 min</MenuItem>
+          </Select>
+        </FormControl>
+      );
+    } else {
+    }
+  };
 
   const useStyles = makeStyles(theme => ({
     root: {
@@ -71,6 +140,26 @@ const MoodForm = () => {
 
   const handleExerciseChange = event => {
     setExercise(event.target.value);
+  };
+
+  const handleExerciseTimeChange = event => {
+    setExerciseTime(event.target.value);
+  };
+
+   const handleYogaChange = event => {
+    setYoga(event.target.value);
+  };
+
+  const handleYogaTimeChange = event => {
+    setYogaTime(event.target.value);
+  };
+
+  const handleMeditationChange = event => {
+    setMeditation(event.target.value);
+  };
+
+  const handleMeditationTimeChange = event => {
+    setMeditationTime(event.target.value);
   };
 
   const classes = useStyles();
@@ -149,6 +238,33 @@ const MoodForm = () => {
               <MenuItem value={true}>Yes</MenuItem>
             </Select>
           </FormControl>
+          {excercizeTimeInput(exercise)}
+          <FormControl className={classes.formControl}>
+            <InputLabel id="yoga-attribute">Yoga</InputLabel>
+            <Select
+              labelId="yoga-attribute"
+              id="yoga-attribute"
+              value={yoga}
+              onChange={handleYogaChange}
+            >
+              <MenuItem value={false}>No</MenuItem>
+              <MenuItem value={true}>Yes</MenuItem>
+            </Select>
+          </FormControl>
+          {yogaTimeInput(yoga)}
+          <FormControl className={classes.formControl}>
+            <InputLabel id="mediation-attribute">Meditation</InputLabel>
+            <Select
+              labelId="meditation-attribute"
+              id="meditation-attribute"
+              value={meditation}
+              onChange={handleMeditationChange}
+            >
+              <MenuItem value={false}>No</MenuItem>
+              <MenuItem value={true}>Yes</MenuItem>
+            </Select>
+          </FormControl>
+          {meditationTimeInput(meditation)}
         </FormGroup>
       </div>
     </Container>
