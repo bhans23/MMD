@@ -11,14 +11,14 @@ import Container from "@material-ui/core/Container";
 
 const MoodForm = () => {
   const [sleep, setSleep] = useState(0);
-  const [med, setMed] = useState("");
+  const [medication, setMedication] = useState(null);
+  const [medicationDosage, setMedicationDosage] = useState(null);
   const [exercise, setExercise] = useState(null);
   const [exerciseTime, setExerciseTime] = useState(null);
   const [yoga, setYoga] = useState(null);
   const [yogaTime, setYogaTime] = useState(null);
   const [meditation, setMeditation] = useState(null);
   const [meditationTime, setMeditationTime] = useState(null);
-
 
   const excercizeTimeInput = exercise => {
     if (exercise === true) {
@@ -72,7 +72,9 @@ const MoodForm = () => {
     if (meditation === true) {
       return (
         <FormControl className={classes.formControl}>
-          <InputLabel id="meditation-time-attribute">Meditation Time</InputLabel>
+          <InputLabel id="meditation-time-attribute">
+            Meditation Time
+          </InputLabel>
           <Select
             labelId="meditation-time-attribute"
             id="meditation-time-attribute"
@@ -85,6 +87,46 @@ const MoodForm = () => {
             <MenuItem value={40}>40 min</MenuItem>
             <MenuItem value={50}>50 min</MenuItem>
             <MenuItem value={60}>60 min</MenuItem>
+          </Select>
+        </FormControl>
+      );
+    } else {
+    }
+  };
+
+  const medicationDosageInput = medication => {
+    if (medication !== null) {
+      return (
+        <FormControl className={classes.formControl}>
+          <InputLabel id="medication-dosage-attribute">
+            Medication Dosage
+          </InputLabel>
+          <Select
+            labelId="medication-dosage-attribute"
+            id="medication-dosage-attribute"
+            value={medicationDosage}
+            onChange={handleMedicationDosageChange}
+          >
+            <MenuItem value={10}>10 mg</MenuItem>
+            <MenuItem value={20}>20 mg</MenuItem>
+            <MenuItem value={30}>30 mg</MenuItem>
+            <MenuItem value={40}>40 mg</MenuItem>
+            <MenuItem value={50}>50 mg</MenuItem>
+            <MenuItem value={60}>60 mg</MenuItem>
+            <MenuItem value={70}>70 mg</MenuItem>
+            <MenuItem value={80}>80 mg</MenuItem>
+            <MenuItem value={90}>90 mg</MenuItem>
+            <MenuItem value={100}>100 mg</MenuItem>
+            <MenuItem value={110}>110 mg</MenuItem>
+            <MenuItem value={120}>120 mg</MenuItem>
+            <MenuItem value={130}>130 mg</MenuItem>
+            <MenuItem value={140}>140 mg</MenuItem>
+            <MenuItem value={150}>150 mg</MenuItem>
+            <MenuItem value={160}>160 mg</MenuItem>
+            <MenuItem value={170}>170 mg</MenuItem>
+            <MenuItem value={180}>180 mg</MenuItem>
+            <MenuItem value={190}>190 mg</MenuItem>
+            <MenuItem value={200}>200 mg</MenuItem>
           </Select>
         </FormControl>
       );
@@ -134,8 +176,12 @@ const MoodForm = () => {
     setSleep(event.target.value);
   };
 
-  const handleMedChange = event => {
-    setMed(event.target.value);
+  const handleMedicationChange = event => {
+    setMedication(event.target.value);
+  };
+
+  const handleMedicationDosageChange = event => {
+    setMedicationDosage(event.target.value);
   };
 
   const handleExerciseChange = event => {
@@ -146,7 +192,7 @@ const MoodForm = () => {
     setExerciseTime(event.target.value);
   };
 
-   const handleYogaChange = event => {
+  const handleYogaChange = event => {
     setYoga(event.target.value);
   };
 
@@ -215,8 +261,8 @@ const MoodForm = () => {
             <Select
               labelId="med-attribute"
               id="med-attribute"
-              value={med}
-              onChange={handleMedChange}
+              value={medication}
+              onChange={handleMedicationChange}
             >
               <MenuItem value={"zoloft"}>Zoloft (sertraline) </MenuItem>
               <MenuItem value={"celexa"}>Celexa (citalopram)</MenuItem>
@@ -226,6 +272,7 @@ const MoodForm = () => {
               <MenuItem value={"cymbalta"}>Cymbalta (duloxetine)</MenuItem>
             </Select>
           </FormControl>
+          {medicationDosageInput(medication)}
           <FormControl className={classes.formControl}>
             <InputLabel id="exercise-attribute">Excerise</InputLabel>
             <Select
