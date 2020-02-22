@@ -10,8 +10,11 @@ export const useMood = () => {
   const [yogaTime, setYogaTime] = useState(null);
   const [meditation, setMeditation] = useState(null);
   const [meditationTime, setMeditationTime] = useState(null);
+  const [activity, setActivity] = useState(null);
 
   return {
+    activity,
+    setActivity,
     moodStates: {
       sleep,
       setSleep,

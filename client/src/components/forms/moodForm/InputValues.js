@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext } from "react";
 import { MoodContext } from "../../../providers/MoodContext";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -13,11 +13,21 @@ const InputValues = () => {
     },
     margin: {
       height: theme.spacing(3)
+    },
+
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2)
     }
   }));
   const classes = useStyles();
   const moods = useContext(MoodContext);
   const {
+    activity,
+    setActivity,
     moodStates: {
       sleep,
       setSleep,
@@ -76,9 +86,35 @@ const InputValues = () => {
     setMeditationTime(event.target.value);
   };
 
-  const inputLabel = useRef(null);
+  const handleActivityChange = event => {
+    setActivity(event.target.value);
+  };
 
-  const timeArray =  Array(6).fill(null).map((_, x) => (<MenuItem value={(x + 1) * 10}>{(x + 1) * 10} min</MenuItem>));
+  const timeArray = Array(6)
+    .fill(null)
+    .map((_, x) => (
+      <MenuItem value={(x + 1) * 10}>{(x + 1) * 10} min</MenuItem>
+    ));
+
+  const sleepInput = () => {
+    return (
+      <FormControl className={classes.formControl}>
+        <InputLabel id="sleep-attribute">Sleep</InputLabel>
+        <Select
+          labelId="sleep-attribute"
+          id="sleep-attribute"
+          value={sleep}
+          onChange={handleSleepChange}
+        >
+          {Array(24)
+            .fill(null)
+            .map((_, x) => (
+              <MenuItem value={x + 1}>{x + 1} hrs </MenuItem>
+            ))}
+        </Select>
+      </FormControl>
+    );
+  };
 
   const medicationAttributeForm = () => {
     const medicationDosageInput = medication => {
@@ -94,13 +130,11 @@ const InputValues = () => {
               value={medicationDosage}
               onChange={handleMedicationDosageChange}
             >
-              <>
-                {Array(21)
-                  .fill(null)
-                  .map((_, x) => (
-                    <MenuItem value={(x + 1) * 10}>{(x + 1) * 10} mg </MenuItem>
-                  ))}
-              </>
+              {Array(21)
+                .fill(null)
+                .map((_, x) => (
+                  <MenuItem value={(x + 1) * 10}>{(x + 1) * 10} mg </MenuItem>
+                ))}
             </Select>
           </FormControl>
         );
@@ -125,11 +159,9 @@ const InputValues = () => {
             <MenuItem value={"cymbalta"}>Cymbalta (duloxetine)</MenuItem>
           </Select>
         </FormControl>
+        {medicationDosageInput(medication)}
       </>
     );
-    {
-      medicationDosageInput(medication);
-    }
   };
 
   const exceriseAttributeForm = () => {
@@ -144,7 +176,7 @@ const InputValues = () => {
               value={exerciseTime}
               onChange={handleExerciseTimeChange}
             >
-              <>{timeArray()}</>
+              <>{timeArray}</>
             </Select>
           </FormControl>
         );
@@ -182,7 +214,7 @@ const InputValues = () => {
               value={yogaTime}
               onChange={handleYogaTimeChange}
             >
-              <>{timeArray()}</>
+              <>{timeArray}</>
             </Select>
           </FormControl>
         );
@@ -208,8 +240,8 @@ const InputValues = () => {
     );
   };
 
-  const meditationAttributeForm = (meditation) => {
-    const meditationTimeInput = (meditation) => {
+  const meditationAttributeForm = meditation => {
+    const meditationTimeInput = meditation => {
       if (meditation === true) {
         return (
           <FormControl className={classes.formControl}>
@@ -249,21 +281,35 @@ const InputValues = () => {
     );
   };
 
-  return (
-    <>
+  const activitySelect = activity => {
+    const sleepActivity = (activity) => {
+      if (activity === sleep) {
+        return <>{sleepInput()}</>;
+      } else {
+      }
+    };
+
+    return (
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Choose Activity</InputLabel>
+        <InputLabel id="activity-select-label">Choose Activity</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          //   value={age}
-          //   onChange={handleChange}
+          labelId="activity-select-label"
+          id="activity-select"
+          value={activity}
+          onChange={handleActivityChange}
         >
-          <>{meditationAttributeForm(meditation)}</>
+          <MenuItem value={sleep}>Sleep</MenuItem>
+          <MenuItem value={meditation}>Meditation</MenuItem>
+          <MenuItem value={exercise}>Excerise</MenuItem>
+          <MenuItem value={medication}>Medication</MenuItem>
+          <MenuItem value={yoga}>Yoga</MenuItem>
         </Select>
+        {sleepActivity(activity)}
       </FormControl>
-    </>
-  );
+    );
+  };
+
+  return <>{activitySelect(activity)}</>;
 };
 
 export default InputValues;
