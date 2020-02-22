@@ -5,11 +5,14 @@ import "./index.css";
 import App from "./App";
 import "./css/mainApp.css";
 import { AuthProvider } from "./providers/AuthContext";
+import { MoodProvider } from "./providers/MoodContext";
 
 ReactDOM.render(
   <BrowserRouter>
     <AuthProvider>
-      <App />
+      <MoodProvider>
+        <App />
+      </MoodProvider>
     </AuthProvider>
   </BrowserRouter>,
 
