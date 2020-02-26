@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { MoodContext } from "../../../providers/MoodContext";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
+import FormGroup from "@material-ui/core/FormGroup";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 
@@ -25,12 +26,15 @@ const InputValues = () => {
   }));
   const classes = useStyles();
   const moods = useContext(MoodContext);
+
   const {
-    activity,
-    setActivity,
     moodStates: {
+      activity,
+      setActivity,
       sleep,
       setSleep,
+      sleep_time,
+      setSleep_time,
       medication,
       setMedication,
       medicationDosage,
@@ -49,6 +53,10 @@ const InputValues = () => {
       setMeditationTime
     }
   } = moods;
+
+  const handleSleepTimeChange = event => {
+    setSleep_time(event.target.value);
+  };
 
   const handleSleepChange = event => {
     setSleep(event.target.value);
@@ -99,12 +107,12 @@ const InputValues = () => {
   const sleepInput = () => {
     return (
       <FormControl className={classes.formControl}>
-        <InputLabel id="sleep-attribute">Sleep</InputLabel>
+        <InputLabel id="sleep-time-attribute">Sleep Time</InputLabel>
         <Select
-          labelId="sleep-attribute"
-          id="sleep-attribute"
-          value={sleep}
-          onChange={handleSleepChange}
+          labelId="sleep-time-attribute"
+          id="sleep-time-attribute"
+          value={sleep_time}
+          onChange={handleSleepTimeChange}
         >
           {Array(24)
             .fill(null)
@@ -281,35 +289,43 @@ const InputValues = () => {
     );
   };
 
-  const activitySelect = activity => {
-    const sleepActivity = (activity) => {
+  const activitySelect = moods => {
+    const sleepActivity = moods => {
       if (activity === sleep) {
-        return <>{sleepInput()}</>;
+        
       } else {
+        
       }
     };
 
     return (
-      <FormControl className={classes.formControl}>
-        <InputLabel id="activity-select-label">Choose Activity</InputLabel>
-        <Select
-          labelId="activity-select-label"
-          id="activity-select"
-          value={activity}
-          onChange={handleActivityChange}
-        >
-          <MenuItem value={sleep}>Sleep</MenuItem>
-          <MenuItem value={meditation}>Meditation</MenuItem>
-          <MenuItem value={exercise}>Excerise</MenuItem>
-          <MenuItem value={medication}>Medication</MenuItem>
-          <MenuItem value={yoga}>Yoga</MenuItem>
-        </Select>
-        {sleepActivity(activity)}
-      </FormControl>
+      <FormGroup>
+        <FormControl className={classes.formControl}>
+          <InputLabel id="activity-select-label">Choose Activity</InputLabel>
+          <Select
+            labelId="activity-select-label"
+            id="activity-select"
+            value={activity}
+            onChange={handleActivityChange}
+          >
+            <MenuItem value={sleep}>Sleep</MenuItem>
+            <MenuItem value={meditation}>Meditation</MenuItem>
+            <MenuItem value={exercise}>Excerise</MenuItem>
+            <MenuItem value={medication}>Medication</MenuItem>
+            <MenuItem value={yoga}>Yoga</MenuItem>
+          </Select>
+          {sleepActivity(activity)}
+        </FormControl>
+      </FormGroup>
     );
   };
 
-  return <>{activitySelect(activity)}</>;
+  return (
+    <>
+      {activitySelect(activity)}
+      {console.log(moods)}
+    </>
+  );
 };
 
 export default InputValues;

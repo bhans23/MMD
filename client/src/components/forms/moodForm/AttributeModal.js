@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
-import InputValues from './InputValues';
+import Button from "@material-ui/core/Button";
+import InputValues from "./InputValues";
 
 function getModalStyle() {
   const top = 50;
@@ -50,7 +51,13 @@ const AttributeModal = () => {
         onClose={handleClose}
       >
         <div style={modalStyle} className={classes.paper}>
-          <InputValues/>
+          <form>
+            <InputValues />
+          
+          <Button color="primary" variant="contained" type="submit">
+            Add Activity
+          </Button>
+          </form>
         </div>
       </Modal>
     </div>

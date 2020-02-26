@@ -1,7 +1,8 @@
 import React, { createContext, useState } from "react";
 
 export const useMood = () => {
-  const [sleep, setSleep] = useState(0);
+  const [sleep, setSleep] = useState(null);
+  const [sleep_time, setSleep_time] = useState(null);
   const [medication, setMedication] = useState(null);
   const [medicationDosage, setMedicationDosage] = useState(null);
   const [exercise, setExercise] = useState(null);
@@ -11,13 +12,17 @@ export const useMood = () => {
   const [meditation, setMeditation] = useState(null);
   const [meditationTime, setMeditationTime] = useState(null);
   const [activity, setActivity] = useState(null);
+  
 
   return {
-    activity,
-    setActivity,
     moodStates: {
+      activity,
+      setActivity,
+      
       sleep,
       setSleep,
+      sleep_time,
+      setSleep_time,
       medication,
       setMedication,
       medicationDosage,

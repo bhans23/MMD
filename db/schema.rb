@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_18_164852) do
+ActiveRecord::Schema.define(version: 2020_02_22_180435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "attributes", force: :cascade do |t|
-    t.integer "sleep"
+    t.integer "sleep_time"
     t.string "medication"
     t.integer "medication_dosage"
     t.boolean "excersize"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2020_02_18_164852) do
     t.integer "yoga_time"
     t.boolean "meditation"
     t.integer "meditation_time"
+    t.boolean "sleep"
     t.index ["mood_id"], name: "index_attributes_on_mood_id"
   end
 
