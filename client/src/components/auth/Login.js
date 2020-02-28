@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
-import Register from "./Register";
+import Grid from '@material-ui/core/Grid';
 
 
 const Login = () => {
@@ -35,7 +35,8 @@ const Login = () => {
   };
 
   return (
-    <Container style={{ maxWidth: 480, margin: "0 auto", textAlign: "center" }}>
+    <Grid container spacing={3}>
+    <Container className='login-form'>
       <form onSubmit={handleSubmit}>
         <Typography variant="h2">Login</Typography>
         <FormGroup>
@@ -70,6 +71,7 @@ const Login = () => {
         Register
       </Button>
     </Container>
+    </Grid>
   );
 };
 
