@@ -1,10 +1,13 @@
-import React from "react";
-import { withStyles} from "@material-ui/core/styles";
+import React, { useContext } from "react";
+import { withStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
+import { MoodContext } from "../../../providers/MoodContext";
 
 const MoodSlider = () => {
-  
-
+  const moods = useContext(MoodContext);
+  const {
+    moodStates: { moodSliderValue, setMoodSliderValue }
+  } = moods;
   const MoodSlider = withStyles({
     root: {
       color: "#52af77",
@@ -36,13 +39,19 @@ const MoodSlider = () => {
   })(Slider);
 
   return (
-    <MoodSlider
-      valueLabelDisplay="on"
-      aria-label="pretto slider"
-      defaultValue={5}
-      min={0}
-      max={10}
-    />
+    <>
+      <MoodSlider
+        value={moodSliderValue}
+        onChange={e => setMoodSliderValue(e.target.value)}
+        valueLabelDisplay="on"
+        aria-label="pretto slider"
+        defaultValue={5}
+        min={0}
+        max={10}
+      />
+
+      {console.log(moodSliderValue)}
+    </>
   );
 };
 
