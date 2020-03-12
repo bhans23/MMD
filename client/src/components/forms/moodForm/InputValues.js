@@ -53,14 +53,46 @@ const InputValues = () => {
       setMeditationTime
     }
   } = moods;
-  
+   const handleChange = (event) => {
+     const valueChange = event.target.name;
+     valueChange(event.target.value);
+   }
+
+  const handleSleepTimeChange = event => {
+    setSleepTime(event.target.value);
+  };
+
+  const handleMedicationChange = event => {
+    setMedication(event.target.value);
+  };
+
+  const handleMedicationDosageChange = event => {
+    setMedicationDosage(event.target.value);
+  };
+
+  const handleExerciseTimeChange = event => {
+    setExerciseTime(event.target.value);
+  };
+
+  const handleYogaTimeChange = event => {
+    setYogaTime(event.target.value);
+  };
+
+  const handleMeditationTimeChange = event => {
+    setMeditationTime(event.target.value);
+  };
+
+  const handleActivityChange = event => {
+    setActivity(event.target.value);
+  };
+
   const timeArray = Array(6)
     .fill(null)
     .map((_, x) => (
       <MenuItem value={(x + 1) * 10}>{(x + 1) * 10} min</MenuItem>
     ));
 
-  const sleepAttributeForm = () => {
+  const sleepAttributeForm = activity => {
     if (activity === "sleepSelect") {
       setSleep(true);
       return (
@@ -71,7 +103,7 @@ const InputValues = () => {
             labelId="sleep-time-attribute"
             id="sleep-time-attribute"
             value={sleepTime}
-            onChange={e => setSleepTime(e.target.value) }
+            onChange={e => setSleepTime(e.target.value)}
           >
             {Array(24)
               .fill(null)
@@ -84,60 +116,8 @@ const InputValues = () => {
     }
   };
 
-  const medicationAttributeForm = () => {
-    const medicationDosageInput = medication => {
-      if (medication !== null) {
-        return (
-          <FormControl className={classes.formControl}>
-            <InputLabel id="medication-dosage-attribute">
-              Medication Dosage
-            </InputLabel>
-            <Select
-              name="setMedicationDosage"
-              labelId="medication-dosage-attribute"
-              id="medication-dosage-attribute"
-              value={medicationDosage}
-              onChange={e => setMedicationDosage(e.target.value) }
-            >
-              {Array(21)
-                .fill(null)
-                .map((_, x) => (
-                  <MenuItem value={(x + 1) * 10}>{(x + 1) * 10} mg </MenuItem>
-                ))}
-            </Select>
-          </FormControl>
-        );
-      } 
-    };
 
-    if (activity === "medicationSelect") {
-      return (
-        <>
-          <FormControl className={classes.formControl}>
-            <InputLabel id="med-attribute">Medication</InputLabel>
-            <Select
-              name="setMedication"
-              labelId="med-attribute"
-              id="med-attribute"
-              value={medication}
-              onChange={e => setMedication(e.target.value) }
-            >
-              <MenuItem value={"zoloft"}>Zoloft (sertraline) </MenuItem>
-              <MenuItem value={"celexa"}>Celexa (citalopram)</MenuItem>
-              <MenuItem value={"prozac"}>Prozac (fluoxetine)</MenuItem>
-              <MenuItem value={"desyrel"}>Desyrel (trazodone)</MenuItem>
-              <MenuItem value={"lexapro"}>Lexapro (escitalopram) </MenuItem>
-              <MenuItem value={"cymbalta"}>Cymbalta (duloxetine)</MenuItem>
-            </Select>
-          </FormControl>
-
-          {medicationDosageInput(medication)}
-        </>
-      );
-    }
-  };
-
-  const exceriseAttributeForm = activity => {
+  const exceriseAttributeForm = () => {
     setExercise(true);
     if (activity === "exerciseSelect") {
       return (
@@ -147,7 +127,7 @@ const InputValues = () => {
             labelId="exercise-time-attribute"
             id="exercise-time-attribute"
             value={exerciseTime}
-            onChange={e => setExerciseTime(e.target.value) }
+            onChange={handleExerciseTimeChange}
           >
             {timeArray}
           </Select>
@@ -167,7 +147,7 @@ const InputValues = () => {
             labelId="yoga-time-attribute"
             id="yoga-time-attribute"
             value={yogaTime}
-            onChange={e => setYoga(e.target.value) }
+            onChange={handleYogaTimeChange}
           >
             {timeArray}
           </Select>
@@ -189,7 +169,7 @@ const InputValues = () => {
             labelId="meditation-time-attribute"
             id="meditation-time-attribute"
             value={meditationTime}
-            onChange={e => setMeditationTime(e.target.value) }
+            onChange={handleMeditationTimeChange}
           >
             {timeArray}
           </Select>
@@ -214,7 +194,7 @@ const InputValues = () => {
             labelId="activity-select-label"
             id="activity-select"
             value={activity}
-            onChange={e => setActivity(e.target.value) }
+            onChange={handleActivityChange}
           >
             <MenuItem value={sleepSelector}>Sleep</MenuItem>
             <MenuItem value={meditationSelector}>Meditation</MenuItem>
@@ -225,7 +205,7 @@ const InputValues = () => {
           <>
             {sleepAttributeForm(activity)}
             {medicationAttributeForm(activity)}
-            {exceriseAttributeForm(activity)}
+            {exceriseAttributeForm()}
             {yogaAttributeForm(activity)}
             {meditationAttributeForm(activity)}
           </>
