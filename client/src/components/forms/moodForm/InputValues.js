@@ -53,13 +53,13 @@ const InputValues = () => {
       setMeditationTime
     }
   } = moods;
+   const handleChange = (event) => {
+     const valueChange = event.target.name;
+     valueChange(event.target.value);
+   }
 
   const handleSleepTimeChange = event => {
     setSleepTime(event.target.value);
-  };
-
-  const handleSleepChange = event => {
-    setSleep(event.target.value);
   };
 
   const handleMedicationChange = event => {
@@ -70,24 +70,12 @@ const InputValues = () => {
     setMedicationDosage(event.target.value);
   };
 
-  const handleExerciseChange = event => {
-    setExercise(event.target.value);
-  };
-
   const handleExerciseTimeChange = event => {
     setExerciseTime(event.target.value);
   };
 
-  const handleYogaChange = event => {
-    setYoga(event.target.value);
-  };
-
   const handleYogaTimeChange = event => {
     setYogaTime(event.target.value);
-  };
-
-  const handleMeditationChange = event => {
-    setMeditation(event.target.value);
   };
 
   const handleMeditationTimeChange = event => {
@@ -106,14 +94,16 @@ const InputValues = () => {
 
   const sleepAttributeForm = activity => {
     if (activity === "sleepSelect") {
+      setSleep(true);
       return (
         <FormControl className={classes.formControl}>
           <InputLabel id="sleep-time-attribute">Sleep Time</InputLabel>
           <Select
+            name="setSleepTime"
             labelId="sleep-time-attribute"
             id="sleep-time-attribute"
             value={sleepTime}
-            onChange={handleSleepTimeChange}
+            onChange={e => setSleepTime(e.target.value)}
           >
             {Array(24)
               .fill(null)
@@ -123,64 +113,12 @@ const InputValues = () => {
           </Select>
         </FormControl>
       );
-    } else {
     }
   };
 
-  const medicationAttributeForm = activity => {
-    const medicationDosageInput = medication => {
-      if (medication !== null) {
-        return (
-          <FormControl className={classes.formControl}>
-            <InputLabel id="medication-dosage-attribute">
-              Medication Dosage
-            </InputLabel>
-            <Select
-              labelId="medication-dosage-attribute"
-              id="medication-dosage-attribute"
-              value={medicationDosage}
-              onChange={handleMedicationDosageChange}
-            >
-              {Array(21)
-                .fill(null)
-                .map((_, x) => (
-                  <MenuItem value={(x + 1) * 10}>{(x + 1) * 10} mg </MenuItem>
-                ))}
-            </Select>
-          </FormControl>
-        );
-      } else {
-      }
-    };
 
-    if (activity === "medicationSelect") {
-      return (
-        <>
-          <FormControl className={classes.formControl}>
-            <InputLabel id="med-attribute">Medication</InputLabel>
-            <Select
-              labelId="med-attribute"
-              id="med-attribute"
-              value={medication}
-              onChange={handleMedicationChange}
-            >
-              <MenuItem value={"zoloft"}>Zoloft (sertraline) </MenuItem>
-              <MenuItem value={"celexa"}>Celexa (citalopram)</MenuItem>
-              <MenuItem value={"prozac"}>Prozac (fluoxetine)</MenuItem>
-              <MenuItem value={"desyrel"}>Desyrel (trazodone)</MenuItem>
-              <MenuItem value={"lexapro"}>Lexapro (escitalopram) </MenuItem>
-              <MenuItem value={"cymbalta"}>Cymbalta (duloxetine)</MenuItem>
-            </Select>
-          </FormControl>
-
-          {medicationDosageInput(medication)}
-        </>
-      );
-    } else {
-    }
-  };
-
-  const exceriseAttributeForm = activity => {
+  const exceriseAttributeForm = () => {
+    setExercise(true);
     if (activity === "exerciseSelect") {
       return (
         <FormControl className={classes.formControl}>
@@ -195,16 +133,17 @@ const InputValues = () => {
           </Select>
         </FormControl>
       );
-    } else {
     }
   };
 
   const yogaAttributeForm = activity => {
+    setYoga(true);
     if (activity === "yogaSelect") {
       return (
         <FormControl className={classes.formControl}>
           <InputLabel id="yoga-time-attribute">Yoga Time</InputLabel>
           <Select
+            name="setYogaTime"
             labelId="yoga-time-attribute"
             id="yoga-time-attribute"
             value={yogaTime}
@@ -214,11 +153,11 @@ const InputValues = () => {
           </Select>
         </FormControl>
       );
-    } else {
     }
   };
 
   const meditationAttributeForm = activity => {
+    setMeditation(true);
     if (activity === "meditationSelect") {
       return (
         <FormControl className={classes.formControl}>
@@ -226,6 +165,7 @@ const InputValues = () => {
             Meditation Time
           </InputLabel>
           <Select
+            name="SetMeditationTime"
             labelId="meditation-time-attribute"
             id="meditation-time-attribute"
             value={meditationTime}
@@ -235,7 +175,6 @@ const InputValues = () => {
           </Select>
         </FormControl>
       );
-    } else {
     }
   };
 
@@ -251,6 +190,7 @@ const InputValues = () => {
         <FormControl className={classes.formControl}>
           <InputLabel id="activity-select-label">Choose Activity</InputLabel>
           <Select
+            name="setActivity"
             labelId="activity-select-label"
             id="activity-select"
             value={activity}
@@ -265,7 +205,7 @@ const InputValues = () => {
           <>
             {sleepAttributeForm(activity)}
             {medicationAttributeForm(activity)}
-            {exceriseAttributeForm(activity)}
+            {exceriseAttributeForm()}
             {yogaAttributeForm(activity)}
             {meditationAttributeForm(activity)}
           </>

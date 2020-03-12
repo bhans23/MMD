@@ -27,6 +27,9 @@ const useStyles = makeStyles(theme => ({
 
 const AttributeModal = () => {
   const classes = useStyles();
+  const handleSubmit = () => {
+    
+  }
 
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
@@ -51,7 +54,7 @@ const AttributeModal = () => {
         onClose={handleClose}
       >
         <div style={modalStyle} className={classes.paper}>
-          <form>
+          <form onSubmit={handleSubmit}>
             <InputValues />
           
           <Button color="primary" variant="contained" type="submit">
